@@ -1,0 +1,5 @@
+node_modules
+coverage
+.nyc_output
+es5
+README.md

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
+</head>
+<body>
+  <div>
+    <form id="form"  method="POST"  action="/api/v1/upload" enctype="multipart/form-data">
+      <input type="file" id="assets" name="assets" pattern="/.json$/" multiple>      
+      <br>
+      <button id="submit">upload</button>
+  </div>
+  <script>
+    // document
+    //   .getElementById('form')
+    //   .addEventListener('submit', (e) => e.preventDefault())
+
+    // document  
+    //   .getElementById('file')
+    //   .addEventListener('change', (e) => {
+    //     // const upload = document  
+    //     //   .getElementById('upload-input')
+    //     const form = document.getElementById('form')
+    //     console.log(e.target.files, new FormData(form))
+      
+    //     // const headers = new Headers( {
+    //     //   'Content-Type': 'application/json'
+    //     // })
+    //     // fetch('/api/v1/upload', {
+    //     //   method: 'POST',
+    //     //   headers,
+    //     //   mode: 'cors',
+    //     //   body: {
+    //     //     avatar: new FormData()
+    //     //   }
+    //     // }).then((res) => {
+    //     //   console.log(res)
+    //     // })
+    //     // .catch((err) => {
+    //     //   console.log(err.response)
+    //     // })
+    //     var instance = axios.create({
+    //       baseURL: '/',
+    //       timeout: 1000,
+    //       headers: {'Content-Type': 'multipart/form-data'}
+    //     });
+    //     instance.post('/api/v1/upload', { avatar: new FormData(form)})
+    //     .then((res) => {
+    //       console.log(res)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err.response)
+    //     })
+    //   })
+
+    const form = document.getElementById('form')
+    const avatar = document.getElementById('avatar')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const formData = new FormData(form)
+        // console.log(formData, avatar.files[0])
+        const  instance = axios.create({
+          baseURL: '/',
+          timeout: 1000,
+          // headers: {'Content-Type': 'multipart/form-data'}
+        });
+        instance.post('/api/v1/upload', formData)
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+      })
+      
+  
+  </script>
+</body>
+
+</html>
