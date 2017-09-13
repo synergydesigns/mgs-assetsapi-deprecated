@@ -1,3 +1,2 @@
-# STARTER FILE FOR JAVSCRIPT SYNERGY PROJECTS
-
-## This Project is still been worked on
+# JS Template 
+ Starter Project For All Synergy Javascript Projects
