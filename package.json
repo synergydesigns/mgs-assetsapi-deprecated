@@ -1,0 +1,11 @@
+{
+  "name": "file_service",
+  "version": "1.0.0",
+  "description": "manage file upload and download on AWS server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomilayo Israel",
+  "license": "ISC"
+}
