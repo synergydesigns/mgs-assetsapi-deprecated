@@ -1,4 +1,3 @@
-# Ignores node_modules folder found onthe root director
 node_modules
 
 # Ignores environment variables
