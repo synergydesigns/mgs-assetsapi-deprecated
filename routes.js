@@ -2,7 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import validate from 'express-validation';
-
+import { join } from 'path'
 const app = express();
 
 app.use(logger('dev'));
@@ -17,9 +17,9 @@ validate.options({
 const router = express.Router();
 
 // routes
-app.post('/api/v1/assets/images', require('./app/controllers/image/post.image.js'))
+app.post('/api/v1/upload', require('./app/controllers/image/post.image.js'))
+app.post('/api/v1/uploads', require('./app/controllers/image/post.multiImage.js'))
 app.use('/api/v1', router);
-
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to Mega Shop Assets Micro services',
 }));

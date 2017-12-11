@@ -23,18 +23,23 @@ const validate = {
  * @return {object} response object
  */
 async function handler(req, res) {
-    const { file, url} = req 
-    const stream = cloudinary.v2.uploader.upload_stream((options, file) => {
+  const { files, url} = req 
+  const i =  files.map(file => new Promise(() => {
+    const stream = cloudinary.v2.uploader
+    .upload_stream((options, file)=> {
       // @TODO broadcast a message to the queue service
       // to update the product service
-      // res.send({file})        
     });
     createReadStream(file.path).pipe(stream)
-    res.status(200).send({message: 'Your files are been uploaded'})
+  }))
+
+  Promise.all(i)
+    res.status(200)
+    .send({message: 'Your files are been uploaded'})
 }
 
 module.exports = [
   // validator(validate),
-  multer.single('asset'),
+  multer.array('assets'),
   wrapper(handler)
 ]
