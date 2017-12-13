@@ -11,3 +11,9 @@ node_modules
 
 # Ignores .DS_Store file created by macOS 
 .DS_Store
+
+# Ignore upload folders
+uploads
+
+# ignores dist build on development
+ dist
