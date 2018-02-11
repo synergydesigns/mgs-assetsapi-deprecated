@@ -16,4 +16,4 @@ node_modules
 uploads
 
 # ignores dist build on development
-/dist
+dist
