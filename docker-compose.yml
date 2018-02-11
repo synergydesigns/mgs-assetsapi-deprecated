@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  megashop-assets-service:
+    container_name: megashop-assets-service
+    image: node:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - .:/wwww/var
+    command:
+      - /bin/bash
+      - -c
+      - |
+        npm run build
+        node dist/server.js
+     
+    ports:
+      - "8045:${PORT}"
+    expose:
+      - 8045
+    networks:
+      - megashop
+networks:
+  megashop:
+    driver: bridge
