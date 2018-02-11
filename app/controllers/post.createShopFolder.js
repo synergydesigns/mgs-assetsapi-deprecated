@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import validator from 'express-validation';
-import { createReadStream } from 'fs'
 
 import cloudinary from '../../../config/cloudinary'
 import multer from '../../../lib/multer'
@@ -23,23 +22,24 @@ const validate = {
  * @return {object} response object
  */
 async function handler(req, res) {
- try { const { files, url} = req 
-  const i =  files.map(file => new Promise(() => {
-    const stream = cloudinary.v2.uploader
-    .upload_stream((options, file)=> {
-      // @TODO broadcast a message to the queue service
-      // to update the product service
-    });
-    createReadStream(file.path).pipe(stream)
-  }))
-
-  Promise.all(i)
-    res.status(200)
-    .send({message: 'Your files are been uploaded'})} catch (e) { console.log(e)}
+  try {
+    const { file, url} = req 
+    cloudinary.v2
+      .uploader.upload_stream({
+        resource_type: 'raw'
+      }, (error, result) => console.log(result))
+  .end(file.buffer);
+  
+  res.send()
+  
+  } catch(e) {
+    console.log(e)
+    throw(e)
+  }
 }
 
 module.exports = [
-  // validator(validate),zx
-  multer.array('assets'),
+  // validator(validate),
+  multer.single('avatar'),
   wrapper(handler)
 ]

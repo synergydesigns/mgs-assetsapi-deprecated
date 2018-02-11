@@ -36,26 +36,6 @@ app.use((err, req, res, next) => {
         location: error.location,
       }))
     });
-  } else if (err.name === 'SequelizeValidationError') {
-    return res.status(422).json({
-      status: 422,
-      message: 'An error occurred validating your request',
-      errors: err.errors.map(error => ({
-        field: error.path,
-        message: error.message,
-        location: 'database',
-      }))
-    });
-  } else if (err.name === 'SequelizeForeignKeyConstraintError') {
-    return res.status(400).json({
-      status: 400,
-      message: 'An error occurred foreign Key constraint',
-      errors: {
-        field: err.path,
-        message: err.parent.detail,
-        location: err.parent.table,
-      }
-    });
   } else if (err.status) {
     return res
       .status(err.status)
